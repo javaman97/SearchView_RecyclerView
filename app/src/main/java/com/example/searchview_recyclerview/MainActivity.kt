@@ -6,14 +6,13 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+
 import com.example.searchview_recyclerview.databinding.ActivityMainBinding
 import java.util.*
 import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
-//    private lateinit var recyclerView:RecyclerView
-   private lateinit var searchView:SearchView
+
    private  var iceCreamList=ArrayList<iceCreamData>()
    private lateinit var adapter: IceCreamAdapter
     lateinit var binding:ActivityMainBinding
@@ -28,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         adapter= IceCreamAdapter(iceCreamList)
         binding.recyclerView.adapter=adapter
 
-        searchView.setOnQueryTextListener(object:SearchView.OnQueryTextListener{
+        binding.searchView.setOnQueryTextListener(object:SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                return false
             }
@@ -51,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             if(filterArrayList.isEmpty()){
                 Toast.makeText(this,"No data found",Toast.LENGTH_SHORT).show()
             }else{
-                adapter.setFilteredList(filterArrayList)
+               adapter.setFilteredList(filterArrayList)
             }
         }
 

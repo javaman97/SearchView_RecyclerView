@@ -4,32 +4,29 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.searchview_recyclerview.databinding.ActivityMainBinding
 import java.util.*
 import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var recyclerView:RecyclerView
-    private lateinit var searchView:SearchView
-    private  var iceCreamList=ArrayList<iceCreamData>()
-    private lateinit var adapter: IceCreamAdapter
-
+//    private lateinit var recyclerView:RecyclerView
+   private lateinit var searchView:SearchView
+   private  var iceCreamList=ArrayList<iceCreamData>()
+   private lateinit var adapter: IceCreamAdapter
+    lateinit var binding:ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        recyclerView=findViewById(R.id.recyclerView)
-        searchView=findViewById(R.id.searchView)
-
-        recyclerView.setHasFixedSize(true)
-
-        recyclerView.layoutManager=LinearLayoutManager(this)
+        binding=DataBindingUtil.setContentView(this,R.layout.activity_main)
+        binding.recyclerView.setHasFixedSize(true)
+        binding.recyclerView.layoutManager=LinearLayoutManager(this)
 
         addDataToList()
 
         adapter= IceCreamAdapter(iceCreamList)
-        recyclerView.adapter=adapter
+        binding.recyclerView.adapter=adapter
 
         searchView.setOnQueryTextListener(object:SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
